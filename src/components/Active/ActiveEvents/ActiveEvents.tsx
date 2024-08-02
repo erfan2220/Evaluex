@@ -4,19 +4,23 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const ActiveEvents = ({name}) => {
+const ActiveEvents = ({name,season, year,provinceName,kpiArchiveData2}) => {
 
     const navigate = useNavigate();
 
+    console.log("kpiArchive2",kpiArchiveData2)
+
     const handleLink = (name) => {
-        navigate('/province', { state: { selectedName: name } });
+        navigate('/province', { state: { selectedName: name,provinceName:provinceName,kpiArchiveData2 } });
     };
 
     return (
-        <div className=" bg-[#EFF1FF] rounded-[16px] w-[196px] h-[120px] flex items-center justify-center border-[1px] border-solid border-[#DDD4D4] cursor-pointer" onClick={()=>{
+        <div className=" bg-[#1F202C] rounded-[6px] w-[246px] h-[145px] flex flex-col items-center justify-center   cursor-pointer" onClick={()=>{
             handleLink(name)
         }}>
-            <span className="font-[600] text-[#3E4DCE] text-[18px]">{name}</span>
+            <img src="/images/active/Star.svg" alt=""/>
+            <span className="font-[600] text-white text-[18px]">{season} {year}</span>
+            <span className="text-[#5395FF] text-[12px] opacity-90">4 روز تا پایان امتیازدهی</span>
         </div>
     );
 };

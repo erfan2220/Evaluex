@@ -1,6 +1,3 @@
-//@ts-nocheck
-// tableKpisSlice.ts
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Kpi {
@@ -10,6 +7,8 @@ interface Kpi {
     vendor: string;
     rf_system: string;
     max_score: number;
+    score?: number;
+    description?: string;
 }
 
 interface TableKpisState {
@@ -38,11 +37,37 @@ const tableKpisSlice = createSlice({
             state.descOpen = action.payload;
         },
         updateKpiDescription(state, action: PayloadAction<{ index: number; description: string }>) {
-            state.kpis[action.payload.index].description = action.payload.description;
+            const { index, description } = action.payload;
+            if (index >= 0 && index < state.kpis.length) {
+                state.kpis[index].description = description;
+            } else {
+                console.warn(`Invalid index ${index} for updating KPI description.`);
+            }
+        },
+        updateKpiScore(state, action: PayloadAction<{ index: number; score: number }>) {
+            const { index, score } = action.payload;
+            if (index >= 0 && index < state.kpis.length) {
+                const kpi = state.kpis[index];
+                const maxScore = kpi.max_score;
+
+                if (score > maxScore) {
+                    alert(`Score cannot exceed Max Score (${maxScore})`);
+                    return;
+                }
+
+                state.kpis = state.kpis.map((kpi, idx) => {
+                    if (idx === index) {
+                        return { ...kpi, score };
+                    }
+                    return kpi;
+                });
+            } else {
+                console.warn(`Invalid index ${index} for updating KPI score.`);
+            }
         },
     },
 });
 
-export const { setKpis, setAttachOpen, setDescOpen, updateKpiDescription } = tableKpisSlice.actions;
+export const { setKpis, setAttachOpen, setDescOpen, updateKpiDescription, updateKpiScore } = tableKpisSlice.actions;
 
 export default tableKpisSlice.reducer;
