@@ -14,6 +14,7 @@ const ShowDataArchive = () => {
     const location = useLocation();
     const {selectedName, kpiArchiveData} = location.state || {};
 
+    console.log("selected",selectedName)
     useEffect(() => {
         if (selectedKpi.kpi_id && selectedName?.province_id) {
             const getTrendData = () => {
