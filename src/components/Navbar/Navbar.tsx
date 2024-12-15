@@ -112,7 +112,7 @@ const Navbar = () =>
    }
 
     return (
-        <div className=" bg-[#282936] w-100 h-[80px] py-[24px] pl-[56px] pr-[51px] flex flex-row justify-between items-center">
+        <div className=" bg-[#1F202c] w-100 h-[80px] py-[24px] pl-[56px] pr-[51px] flex flex-row justify-between items-center">
 
 
             <div className="flex flex-row  items-center gap-[86px]">

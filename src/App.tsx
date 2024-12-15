@@ -116,14 +116,7 @@ function App() {
                             }
                         />
 
-                        <Route
-                            path="/chart"
-                            element={
-                                <Suspense fallback={<div>Loading...</div>}>
-                                    <ChartPage />
-                                </Suspense>
-                            }
-                        />
+
 
 
 
@@ -153,6 +146,14 @@ function App() {
                         element={
                             <Suspense fallback={<div>Loading...</div>}>
                                 <ShowDataArchive />
+                            </Suspense>
+                        }
+                    />
+                    <Route
+                        path="/chart"
+                        element={
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <ChartPage />
                             </Suspense>
                         }
                     />
